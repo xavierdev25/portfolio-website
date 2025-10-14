@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    assetsInclude: ["**/*.glb", "**/*.gltf"],
   },
   integrations: [react()],
 });
