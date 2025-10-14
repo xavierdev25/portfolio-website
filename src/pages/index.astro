@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import CurvedLoop from "@/components/ui/CurvedLoop";
 import Header from "@/components/Header.astro";
+import Hero from "@/components/Hero.astro";
 ---
 
 <Layout>
-  <div class="bg-[#A216D9]">
+  <div class="bg-[#0B0705]">
     <CurvedLoop
       marqueeText="[UI/UX] ✦ [Frontend Develop] ✦ [Web Develop] ✦ [Web Design] ✦ [Motion Design] ✦ [Graphic Design] ✦ "
       speed={1}
@@ -14,5 +15,6 @@ import Header from "@/components/Header.astro";
       interactive={true}
       client:only
     />
+    <Hero />
   </div>
 </Layout>
