@@ -4,6 +4,8 @@ import (
 	"errors"
 	"regexp"
 	"strings"
+
+	"github.com/xavierdev25/portfolio-backend/utils"
 )
 
 // ContactRequest representa los datos del formulario de contacto
@@ -21,49 +23,50 @@ type ContactResponse struct {
 	Message string `json:"message"`
 }
 
-// Validate valida los datos del formulario de contacto
+// Validate valida y sanitiza los datos del formulario de contacto
 func (c *ContactRequest) Validate() error {
-	// Validar nombres
-	if strings.TrimSpace(c.FirstName) == "" {
-		return errors.New("el nombre es requerido")
+	// Sanitizar y validar nombres
+	sanitized, valid := utils.ValidateAndSanitize(c.FirstName, 100)
+	if !valid || sanitized == "" {
+		return errors.New("el nombre es requerido y debe tener máximo 100 caracteres")
 	}
-	if len(c.FirstName) > 100 {
-		return errors.New("el nombre es demasiado largo")
-	}
+	c.FirstName = sanitized
 
-	// Validar apellidos
-	if strings.TrimSpace(c.LastName) == "" {
-		return errors.New("los apellidos son requeridos")
+	// Sanitizar y validar apellidos
+	sanitized, valid = utils.ValidateAndSanitize(c.LastName, 100)
+	if !valid || sanitized == "" {
+		return errors.New("los apellidos son requeridos y deben tener máximo 100 caracteres")
 	}
-	if len(c.LastName) > 100 {
-		return errors.New("los apellidos son demasiado largos")
-	}
+	c.LastName = sanitized
 
-	// Validar email
-	if strings.TrimSpace(c.Email) == "" {
+	// Sanitizar y validar email
+	c.Email = utils.SanitizeEmail(c.Email)
+	if c.Email == "" {
 		return errors.New("el correo electrónico es requerido")
 	}
 	if !isValidEmail(c.Email) {
 		return errors.New("el correo electrónico no es válido")
 	}
 
-	// Validar asunto
-	if strings.TrimSpace(c.Subject) == "" {
-		return errors.New("el asunto es requerido")
+	// Sanitizar y validar asunto
+	sanitized, valid = utils.ValidateAndSanitize(c.Subject, 200)
+	if !valid || sanitized == "" {
+		return errors.New("el asunto es requerido y debe tener máximo 200 caracteres")
 	}
-	if len(c.Subject) > 200 {
-		return errors.New("el asunto es demasiado largo")
-	}
+	c.Subject = sanitized
 
-	// Validar mensaje
-	if strings.TrimSpace(c.Message) == "" {
+	// Sanitizar y validar mensaje
+	c.Message = utils.StripHTML(c.Message)
+	c.Message = strings.TrimSpace(c.Message)
+	
+	if c.Message == "" {
 		return errors.New("el mensaje es requerido")
 	}
 	if len(c.Message) < 10 {
 		return errors.New("el mensaje es demasiado corto (mínimo 10 caracteres)")
 	}
 	if len(c.Message) > 5000 {
-		return errors.New("el mensaje es demasiado largo")
+		return errors.New("el mensaje es demasiado largo (máximo 5000 caracteres)")
 	}
 
 	return nil

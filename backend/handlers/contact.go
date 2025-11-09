@@ -2,24 +2,32 @@ package handlers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 
+	"github.com/xavierdev25/portfolio-backend/middleware"
 	"github.com/xavierdev25/portfolio-backend/models"
 	"github.com/xavierdev25/portfolio-backend/services"
+	"github.com/xavierdev25/portfolio-backend/utils"
 )
+
+var securityLogger = utils.NewSecurityLogger(true)
 
 // ContactHandler maneja las solicitudes de contacto
 func ContactHandler(w http.ResponseWriter, r *http.Request) {
+	// Obtener IP del cliente
+	ip := middleware.GetClientIP(r)
+
 	// Decodificar el cuerpo de la solicitud
 	var contactReq models.ContactRequest
 	if err := json.NewDecoder(r.Body).Decode(&contactReq); err != nil {
+		securityLogger.LogInvalidInput(ip, "request_body", "invalid_json")
 		respondWithError(w, http.StatusBadRequest, "Datos inválidos en la solicitud")
 		return
 	}
 
-	// Validar los datos
+	// Validar los datos (ahora también sanitiza)
 	if err := contactReq.Validate(); err != nil {
+		securityLogger.LogInvalidInput(ip, "validation", err.Error())
 		respondWithError(w, http.StatusBadRequest, err.Error())
 		return
 	}
@@ -27,10 +35,13 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	// Enviar el correo electrónico
 	emailService := services.NewEmailService()
 	if err := emailService.SendContactEmail(&contactReq); err != nil {
-		log.Printf("Error al enviar el correo: %v", err)
+		securityLogger.LogEmailSendError(ip, contactReq.Email, err.Error())
 		respondWithError(w, http.StatusInternalServerError, "Error al enviar el mensaje. Por favor, intenta más tarde.")
 		return
 	}
+
+	// Registrar contacto exitoso
+	securityLogger.LogSuccessfulContact(ip, contactReq.Email, contactReq.GetFullName())
 
 	// Responder con éxito
 	respondWithJSON(w, http.StatusOK, models.ContactResponse{

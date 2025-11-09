@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
@@ -23,12 +26,20 @@ func main() {
 		port = "8080"
 	}
 
+	// Crear rate limiter: máximo 5 peticiones cada 15 minutos por IP
+	rateLimiter := middleware.NewRateLimiter(5, 15*time.Minute)
+
 	// Configurar el multiplexor HTTP
 	mux := http.NewServeMux()
 
 	// Rutas
 	mux.HandleFunc("/api/health", handlers.HealthCheckHandler)
-	mux.HandleFunc("/api/contact", middleware.MethodMiddleware("POST", handlers.ContactHandler))
+	
+	// Aplicar rate limiting solo al endpoint de contacto
+	contactHandler := middleware.RateLimitMiddleware(rateLimiter)(
+		middleware.MethodMiddleware("POST", handlers.ContactHandler),
+	)
+	mux.HandleFunc("/api/contact", contactHandler)
 
 	// Configurar CORS
 	c := cors.New(cors.Options{
@@ -42,14 +53,43 @@ func main() {
 	// Aplicar CORS al handler
 	handler := c.Handler(mux)
 
-	// Iniciar el servidor
-	log.Printf("🚀 Servidor iniciado en http://localhost:%s", port)
-	log.Printf("✅ Health check disponible en http://localhost:%s/api/health", port)
-	log.Printf("📧 Endpoint de contacto en http://localhost:%s/api/contact", port)
-
-	if err := http.ListenAndServe(":"+port, handler); err != nil {
-		log.Fatalf("Error al iniciar el servidor: %v", err)
+	// Configurar el servidor con timeouts
+	server := &http.Server{
+		Addr:         ":" + port,
+		Handler:      handler,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
 	}
+
+	// Iniciar el servidor en una goroutine
+	go func() {
+		log.Printf("🚀 Servidor iniciado en http://localhost:%s", port)
+		log.Printf("✅ Health check disponible en http://localhost:%s/api/health", port)
+		log.Printf("📧 Endpoint de contacto en http://localhost:%s/api/contact", port)
+		log.Printf("🛡️  Rate limit: 5 peticiones cada 15 minutos por IP")
+		log.Printf("⏱️  Timeouts configurados: Read 10s | Write 10s | Idle 120s")
+
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Error al iniciar el servidor: %v", err)
+		}
+	}()
+
+	// Esperar señal de interrupción para apagado graceful
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+
+	log.Println("🛑 Apagando servidor...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	if err := server.Shutdown(ctx); err != nil {
+		log.Fatalf("Error en el apagado del servidor: %v", err)
+	}
+
+	log.Println("✅ Servidor apagado correctamente")
 }
 
 // getAllowedOrigins obtiene los orígenes permitidos desde las variables de entorno
