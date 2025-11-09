@@ -1,0 +1,540 @@
+---
+import { getApiUrl, API_CONFIG } from "../../config/api";
+import Toast from "./Toast.astro";
+---
+
+<Toast />
+
+<div id="contact-modal" class="modal-overlay hidden">
+  <div class="modal-container">
+    <div class="modal-content">
+      <button class="modal-close" id="close-contact-modal">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <h2 class="text-5xl font-anton text-[#E75DEE] uppercase mb-2">Contáctame</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Completa el formulario y me pondré en contacto contigo lo antes posible.
+        </p>
+      </div>
+
+      <form id="contact-form" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName" class="form-label">
+              Nombres <span class="text-[#E75DEE]">*</span>
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="form-input"
+              placeholder="Ingresa tus nombres"
+              maxlength="100"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
+              title="Solo se permiten letras"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName" class="form-label">
+              Apellidos <span class="text-[#E75DEE]">*</span>
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="form-input"
+              placeholder="Ingresa tus apellidos"
+              maxlength="100"
+              pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
+              title="Solo se permiten letras"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">
+            Correo Electrónico <span class="text-[#E75DEE]">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            placeholder="tu@email.com"
+            title="Ingresa un correo electrónico válido"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="form-label">
+            Asunto <span class="text-[#E75DEE]">*</span>
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            class="form-input"
+            placeholder="¿De qué quieres hablar?"
+            maxlength="200"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">
+            Mensaje <span class="text-[#E75DEE]">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            class="form-input resize-none"
+            placeholder="Cuéntame sobre tu proyecto o idea..."
+            minlength="10"
+            maxlength="5000"
+            required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-contact" class="btn-secondary"> Cancelar </button>
+          <button type="submit" class="btn-primary"> Enviar Mensaje </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .modal-overlay.hidden {
+    display: none;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+  }
+
+  .modal-container {
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(-20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .modal-overlay.show .modal-container {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: #e75dee;
+    transform: rotate(90deg);
+  }
+
+  .modal-close:hover svg {
+    color: white;
+  }
+
+  .modal-close svg {
+    color: #374151;
+    transition: color 0.3s ease;
+  }
+
+  .modal-header {
+    margin-bottom: 24px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #1f2937;
+    transition: all 0.2s ease;
+    font-family: "Urbanist", sans-serif;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #e75dee;
+    box-shadow: 0 0 0 3px rgba(231, 93, 238, 0.1);
+  }
+
+  .form-input::placeholder {
+    color: #9ca3af;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .btn-primary {
+    background: #e75dee;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #c93dd1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 93, 238, 0.4);
+  }
+
+  .btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .btn-secondary:hover {
+    background: #1e1b1b;
+    color: white;
+  }
+
+  /* Scrollbar personalizado */
+  .modal-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .modal-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .modal-container::-webkit-scrollbar-thumb {
+    background: #e75dee;
+    border-radius: 10px;
+  }
+
+  .modal-container::-webkit-scrollbar-thumb:hover {
+    background: #d14dd9;
+  }
+</style>
+
+<script>
+  import { getApiUrl, API_CONFIG } from "../../config/api";
+
+  const modal = document.getElementById("contact-modal");
+  const closeBtn = document.getElementById("close-contact-modal");
+  const cancelBtn = document.getElementById("cancel-contact");
+  const contactForm = document.getElementById("contact-form") as HTMLFormElement;
+
+  // Validación en tiempo real de los inputs
+  const validateInput = (input: HTMLInputElement | HTMLTextAreaElement) => {
+    const value = input.value.trim();
+    const name = input.name;
+    let error = "";
+
+    switch (name) {
+      case "firstName":
+      case "lastName":
+        if (!value) {
+          error = "Este campo es requerido";
+        } else if (value.length > 100) {
+          error = "Máximo 100 caracteres";
+        } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
+          error = "Solo se permiten letras";
+        }
+        break;
+
+      case "email":
+        if (!value) {
+          error = "El correo es requerido";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Correo electrónico inválido";
+        }
+        break;
+
+      case "subject":
+        if (!value) {
+          error = "El asunto es requerido";
+        } else if (value.length > 200) {
+          error = "Máximo 200 caracteres";
+        }
+        break;
+
+      case "message":
+        if (!value) {
+          error = "El mensaje es requerido";
+        } else if (value.length < 10) {
+          error = "Mínimo 10 caracteres";
+        } else if (value.length > 5000) {
+          error = "Máximo 5000 caracteres";
+        }
+        break;
+    }
+
+    // Remover mensajes de error previos
+    const existingError = input.parentElement?.querySelector(".input-error");
+    if (existingError) {
+      existingError.remove();
+    }
+
+    // Mostrar error si existe
+    if (error) {
+      input.style.borderColor = "#ef4444";
+      const errorElement = document.createElement("span");
+      errorElement.className = "input-error";
+      errorElement.textContent = error;
+      errorElement.style.cssText =
+        "color: #ef4444; font-size: 12px; margin-top: 4px; display: block;";
+      input.parentElement?.appendChild(errorElement);
+      return false;
+    } else {
+      input.style.borderColor = "";
+      return true;
+    }
+  };
+
+  // Agregar validación en tiempo real a todos los inputs
+  const inputs = contactForm?.querySelectorAll("input, textarea");
+  inputs?.forEach((input) => {
+    input.addEventListener("blur", () => {
+      validateInput(input as HTMLInputElement | HTMLTextAreaElement);
+    });
+
+    // Limpiar error al escribir
+    input.addEventListener("input", () => {
+      const existingError = input.parentElement?.querySelector(".input-error");
+      if (existingError) {
+        (input as HTMLInputElement).style.borderColor = "";
+      }
+    });
+  });
+
+  // Función para abrir el modal
+  function openContactModal() {
+    modal?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+      modal?.classList.add("show");
+    }, 10);
+  }
+
+  // Función para cerrar el modal
+  function closeContactModal() {
+    modal?.classList.remove("show");
+
+    setTimeout(() => {
+      modal?.classList.add("hidden");
+      document.body.style.overflow = "";
+      // Limpiar errores al cerrar
+      contactForm?.querySelectorAll(".input-error").forEach((el) => el.remove());
+      contactForm?.querySelectorAll("input, textarea").forEach((input) => {
+        (input as HTMLInputElement).style.borderColor = "";
+      });
+    }, 300);
+  }
+
+  // Event listeners para cerrar el modal
+  closeBtn?.addEventListener("click", closeContactModal);
+  cancelBtn?.addEventListener("click", closeContactModal);
+
+  // Cerrar al hacer click fuera del modal
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeContactModal();
+    }
+  });
+
+  // Cerrar con la tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+      closeContactModal();
+    }
+  });
+
+  // Manejar el envío del formulario
+  contactForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Validar todos los campos antes de enviar
+    let isValid = true;
+    inputs?.forEach((input) => {
+      if (!validateInput(input as HTMLInputElement | HTMLTextAreaElement)) {
+        isValid = false;
+      }
+    });
+
+    if (!isValid) {
+      (window as any).showToast({
+        type: "warning",
+        title: "Campos inválidos",
+        message: "Por favor corrige los errores antes de enviar",
+      });
+      return;
+    }
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = submitBtn.textContent;
+
+    try {
+      // Deshabilitar el botón y mostrar estado de carga
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+      submitBtn.style.opacity = "0.6";
+
+      // Obtener los datos del formulario
+      const formData = new FormData(contactForm);
+      const data = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        message: formData.get("message"),
+      };
+
+      // Enviar al backend
+      const apiUrl = getApiUrl(API_CONFIG.ENDPOINTS.CONTACT);
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Éxito
+        (window as any).showToast({
+          type: "success",
+          title: "¡Mensaje enviado!",
+          message:
+            result.message || "Tu mensaje ha sido enviado correctamente. Te responderé pronto.",
+          duration: 6000,
+        });
+        contactForm.reset();
+        closeContactModal();
+      } else {
+        // Error del servidor
+        (window as any).showToast({
+          type: "error",
+          title: "Error al enviar",
+          message:
+            result.message ||
+            "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente.",
+        });
+      }
+    } catch (error) {
+      // Error de conexión
+      (window as any).showToast({
+        type: "error",
+        title: "Error de conexión",
+        message:
+          "No se pudo conectar con el servidor. Por favor, verifica tu conexión e intenta nuevamente.",
+      });
+    } finally {
+      // Restaurar el botón
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      submitBtn.style.opacity = "1";
+    }
+  });
+
+  // Exportar la función para que pueda ser llamada desde otros componentes
+  (window as any).openContactModal = openContactModal;
+</script>
