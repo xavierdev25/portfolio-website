@@ -1,0 +1,43 @@
+# Binarios y archivos compilados
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+main
+
+# Archivos de Go
+go.work
+
+# Variables de entorno (se pasan por docker-compose)
+.env.local
+.env.*.local
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Documentación (no necesaria en la imagen)
+*.md
+!README.md
+
+# Archivos de test
+*_test.go
+
+# Carpetas temporales
+tmp/
+temp/
+vendor/
