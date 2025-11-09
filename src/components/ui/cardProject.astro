@@ -1,0 +1,46 @@
+---
+import type { Project } from "../../types/project";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="bg-white rounded-[20px] p-4.5 items-strech space-y-4">
+  <div class="flex gap-2">
+    <div class="rounded-full p-2 bg-[#D9D9D9]"></div>
+    <div class="rounded-full p-2 bg-[#D9D9D9]"></div>
+    <div class="rounded-full p-2 bg-[#D9D9D9]"></div>
+  </div>
+  <div
+    class="h-[220px] rectangle rounded-[20px] flex items-center justify-center mx-auto bg-gray-100"
+  >
+    {
+      project.images[0] && (
+        <img
+          src={project.images[0]}
+          alt={project.title}
+          class="w-full h-full object-cover rounded-[10px]"
+        />
+      )
+    }
+  </div>
+  <div class="flex flex-col leading-7 text-[#0B0705]">
+    <span class="text-[24px] font-medium">{project.title}</span>
+    <span class="font-light text-[18px] opacity-50">{project.category}</span>
+  </div>
+  <button
+    class="ver-mas-btn w-full bg-[#E75DEE] hover:bg-[#d14dd9] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+    data-project-id={project.id}
+  >
+    Ver más
+  </button>
+</div>
+
+<style>
+  .rectangle {
+    border: 0.5px solid #afafaf;
+  }
+</style>

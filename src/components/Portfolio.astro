@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import CardProject from "./ui/cardProject.astro";
+import ProjectModal from "./ui/ProjectModal.astro";
+
+const projectEntries = await getCollection("projects");
+
+const projects = projectEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry, index) => ({
+    id: index + 1,
+    title: entry.data.title,
+    category: entry.data.category,
+    description: entry.data.description,
+    images: entry.data.images,
+    technologies: entry.data.technologies,
+    repositoryUrl: entry.data.repositoryUrl,
+    liveUrl: entry.data.liveUrl,
+  }));
+---
+
+<section class="mx-72 py-64 space-y-16">
+  <h1 class="uppercase text-[#E75DEE] font-anton text-8xl text-center">MI PORTAFOLIO</h1>
+
+  <div class="grid grid-cols-3 gap-8">
+    {projects.map((project) => <CardProject project={project} />)}
+  </div>
+
+  <ProjectModal projects={projects} />
+</section>
