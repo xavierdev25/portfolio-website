@@ -29,3 +29,7 @@ html {
 .font-anton{
   font-family: "Anton SC", sans-serif;
 }
+
+*{
+  scroll-behavior: smooth;
+}
