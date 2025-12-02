@@ -2,17 +2,20 @@
 import Skills from "./ui/Skills.astro";
 ---
 
-<section class="flex items-start justify-center gap-24">
+<section
+  class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 md:gap-12 lg:gap-24 px-4 sm:px-8 md:px-12 lg:px-16"
+>
   <Skills />
-  <div class="flex flex-col">
-    <div class="relative w-[480px] h-[740px]">
+  <div class="flex flex-col w-full lg:w-auto">
+    <div
+      class="relative w-full sm:w-[400px] md:w-[440px] lg:w-[480px] h-auto min-h-[600px] sm:min-h-[680px] md:min-h-[720px] lg:h-[740px] mx-auto lg:mx-0"
+    >
       <svg
-        class="absolute inset-0"
+        class="absolute inset-0 w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
-        width="488"
-        height="756"
         viewBox="0 0 488 756"
         fill="none"
+        preserveAspectRatio="none"
         ><rect x="1.5" y="1.5" width="485" height="753" rx="21.5" fill="#480762"></rect><rect
           x="1.5"
           y="1.5"
@@ -25,66 +28,118 @@ import Skills from "./ui/Skills.astro";
           stroke-linejoin="round"
           stroke-dasharray="16 16"></rect></svg
       >
-      <div class="space-y-12 relative z-10 p-9 w-full h-full">
+      <div
+        class="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 relative z-10 p-4 sm:p-6 md:p-8 lg:p-9 w-full h-full"
+      >
         <div>
-          <h2 class="font-anton text-white text-5xl">Educación:</h2>
-          <div class="flex mt-4 gap-2">
-            <img src="/icons/star.svg" class="w-auto h-7 mt-1" alt="" />
+          <h2 class="font-anton text-white text-3xl sm:text-4xl md:text-5xl">Educación:</h2>
+          <div class="flex mt-3 sm:mt-4 gap-2">
+            <img src="/icons/star.svg" class="w-auto h-5 sm:h-6 md:h-7 mt-1" alt="" />
             <div class="text-white flex flex-col">
-              <p class="font-anton text-[#A216D9] text-3xl">2022 - Presente</p>
-              <div class="flex flex-col -space-y-2">
-                <span class="font-black text-2xl">Universidad César Vallejo</span>
-                <label class="font-light text-xl">Ingeniería de Sistemas</label>
+              <p class="font-anton text-[#A216D9] text-xl sm:text-2xl md:text-3xl">
+                2022 - Presente
+              </p>
+              <div class="flex flex-col -space-y-1 sm:-space-y-2">
+                <span class="font-black text-lg sm:text-xl md:text-2xl"
+                  >Universidad César Vallejo</span
+                >
+                <label class="font-light text-base sm:text-lg md:text-xl"
+                  >Ingeniería de Sistemas</label
+                >
               </div>
             </div>
           </div>
         </div>
         <div>
-          <h2 class="font-anton text-white text-5xl">Experiencia:</h2>
-          <div class="flex mt-4 gap-2">
-            <img src="/icons/star.svg" class="w-auto h-7 mt-1" alt="" />
+          <h2 class="font-anton text-white text-3xl sm:text-4xl md:text-5xl">Experiencia:</h2>
+          <div class="flex mt-3 sm:mt-4 gap-2">
+            <img src="/icons/star.svg" class="w-auto h-5 sm:h-6 md:h-7 mt-1" alt="" />
             <div class="text-white flex flex-col">
-              <p class="font-anton text-[#A216D9] text-3xl">Junior 2025 - Septiembre 2025</p>
-              <div class="flex flex-col -space-y-2">
-                <span class="font-black text-2xl">GeekCorp EIRL</span>
-                <label class="font-light text-xl">Desarrollador Frontend</label>
+              <p class="font-anton text-[#A216D9] text-xl sm:text-2xl md:text-3xl">
+                Junior 2025 - Septiembre 2025
+              </p>
+              <div class="flex flex-col -space-y-1 sm:-space-y-2">
+                <span class="font-black text-lg sm:text-xl md:text-2xl">GeekCorp EIRL</span>
+                <label class="font-light text-base sm:text-lg md:text-xl"
+                  >Desarrollador Frontend</label
+                >
               </div>
             </div>
           </div>
-          <div class="flex mt-4 gap-2">
-            <img src="/icons/star.svg" class="w-auto h-7 mt-1" alt="" />
+          <div class="flex mt-3 sm:mt-4 gap-2">
+            <img src="/icons/star.svg" class="w-auto h-5 sm:h-6 md:h-7 mt-1" alt="" />
             <div class="text-white flex flex-col">
-              <p class="font-anton text-[#A216D9] text-3xl">Junior 2025 - Agosto 2025</p>
-              <div class="flex flex-col -space-y-2">
-                <span class="font-black text-2xl">GuimarBot</span>
-                <label class="font-light text-xl">Desarrollador Fullstack</label>
+              <p class="font-anton text-[#A216D9] text-xl sm:text-2xl md:text-3xl">
+                Junior 2025 - Agosto 2025
+              </p>
+              <div class="flex flex-col -space-y-1 sm:-space-y-2">
+                <span class="font-black text-lg sm:text-xl md:text-2xl">GuimarBot</span>
+                <label class="font-light text-base sm:text-lg md:text-xl"
+                  >Desarrollador Fullstack</label
+                >
               </div>
             </div>
           </div>
         </div>
         <div>
-          <h2 class="font-anton text-white text-5xl">Certificación:</h2>
-          <div class="flex mt-4 gap-2">
-            <img src="/icons/star.svg" class="w-auto h-7 mt-1" alt="" />
+          <h2 class="font-anton text-white text-3xl sm:text-4xl md:text-5xl">Certificación:</h2>
+          <div class="flex mt-3 sm:mt-4 gap-2">
+            <img src="/icons/star.svg" class="w-auto h-5 sm:h-6 md:h-7 mt-1" alt="" />
             <div class="text-white flex flex-col">
-              <p class="font-anton text-[#A216D9] text-3xl">2024</p>
-              <span class="font-black text-xl">- Ciberseguridad: Ethical Hacking</span>
-              <span class="font-black text-xl">- Asistente de Help Desk</span>
+              <p class="font-anton text-[#A216D9] text-xl sm:text-2xl md:text-3xl">2024</p>
+              <span class="font-black text-base sm:text-lg md:text-xl"
+                >- Ciberseguridad: Ethical Hacking</span
+              >
+              <span class="font-black text-base sm:text-lg md:text-xl"
+                >- Asistente de Help Desk</span
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="mt-12">
-      <h2 class="font-anton text-4xl text-white">Experiencia de Software:</h2>
-      <div class="grid grid-cols-5 gap-7 mt-4">
-        <img src="/software/vscode.svg" alt="Visual Studio Code Logo" />
-        <img src="/software/figma.svg" alt="Figma Logo" />
-        <img src="/software/premiere.svg" alt="Premiere Pro Logo" />
-        <img src="/software/photoshop.svg" alt="Photoshop Logo" />
-        <img src="/software/illustrator.svg" alt="Illustrator Logo" />
-        <img src="/software/aftereffects.svg" alt="After Effects Logo" />
-        <img src="/software/blender.svg" alt="Blender Logo" />
+    <div class="mt-8 sm:mt-10 md:mt-12">
+      <h2 class="font-anton text-2xl sm:text-3xl md:text-4xl text-white text-center lg:text-left">
+        Experiencia de Software:
+      </h2>
+      <div
+        class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-7 mt-4"
+      >
+        <img
+          src="/software/vscode.svg"
+          alt="Visual Studio Code Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/figma.svg"
+          alt="Figma Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/premiere.svg"
+          alt="Premiere Pro Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/photoshop.svg"
+          alt="Photoshop Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/illustrator.svg"
+          alt="Illustrator Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/aftereffects.svg"
+          alt="After Effects Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
+        <img
+          src="/software/blender.svg"
+          alt="Blender Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-auto lg:h-auto"
+        />
       </div>
     </div>
   </div>

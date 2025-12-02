@@ -44,9 +44,15 @@ const { projects } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 12px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+  }
+
+  @media (min-width: 640px) {
+    .modal-overlay {
+      padding: 20px;
+    }
   }
 
   .modal-overlay.hidden {
@@ -72,20 +78,33 @@ const { projects } = Astro.props;
 
   .modal-content {
     background: white;
-    border-radius: 16px;
-    padding: 32px;
+    border-radius: 12px;
+    padding: 16px;
     position: relative;
+  }
+
+  @media (min-width: 640px) {
+    .modal-content {
+      border-radius: 16px;
+      padding: 24px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .modal-content {
+      padding: 32px;
+    }
   }
 
   .modal-close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 12px;
+    right: 12px;
     background: #f3f4f6;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,8 +113,26 @@ const { projects } = Astro.props;
     z-index: 10;
   }
 
+  @media (min-width: 640px) {
+    .modal-close {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
   .modal-close svg {
     color: #374151;
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .modal-close svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* Animación para el scroll del modal */
@@ -129,17 +166,17 @@ const { projects } = Astro.props;
     if (!project) return;
 
     modalBody.innerHTML = `
-      <h2 class="text-5xl font-anton text-[#E75DEE] pr-12 uppercase">${project.title}</h2>
-      <p class="text-2xl text-[#0B0705] font-bold mb-4">${project.category}</p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-anton text-[#E75DEE] pr-8 sm:pr-12 uppercase">${project.title}</h2>
+      <p class="text-lg sm:text-xl md:text-2xl text-[#0B0705] font-bold mb-3 sm:mb-4">${project.category}</p>
       
       ${
         project.images && project.images.length > 0
           ? `
-        <div class="mb-6 grid gap-4 ${project.images.length > 1 ? "grid-cols-2" : "grid-cols-1"}">
+        <div class="mb-4 sm:mb-6 grid gap-3 sm:gap-4 ${project.images.length > 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}">
           ${project.images
             .map(
               (img) => `
-            <img src="${img}" alt="${project.title}" class="w-full h-64 object-cover rounded-lg" />
+            <img src="${img}" alt="${project.title}" class="w-full h-40 sm:h-52 md:h-64 object-cover rounded-lg" />
           `
             )
             .join("")}
@@ -148,21 +185,21 @@ const { projects } = Astro.props;
           : ""
       }
       
-      <div class="mb-6">
-        <h3 class="text-2xl font-bold text-[#0B0705]">Descripción</h3>
-        <p class="text-gray-700 leading-6 text-lg">${project.description}</p>
+      <div class="mb-4 sm:mb-6">
+        <h3 class="text-xl sm:text-2xl font-bold text-[#0B0705]">Descripción</h3>
+        <p class="text-gray-700 leading-5 sm:leading-6 text-base sm:text-lg">${project.description}</p>
       </div>
       
       ${
         project.technologies && project.technologies.length > 0
           ? `
-        <div class="mb-6">
-          <h3 class="text-2xl font-bold text-[#0B0705] mb-3">Tecnologías</h3>
-          <div class="flex flex-wrap gap-2">
+        <div class="mb-4 sm:mb-6">
+          <h3 class="text-xl sm:text-2xl font-bold text-[#0B0705] mb-2 sm:mb-3">Tecnologías</h3>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
             ${project.technologies
               .map(
                 (tech) => `
-              <span class="bg-[#E75DEE] bg-opacity-10 text-white px-4 py-2 rounded-full text-lg font-semibold">
+              <span class="bg-[#E75DEE] bg-opacity-10 text-white px-2.5 sm:px-4 py-1 sm:py-2 rounded-full text-sm sm:text-base lg:text-lg font-semibold">
                 ${tech}
               </span>
             `
@@ -174,7 +211,7 @@ const { projects } = Astro.props;
           : ""
       }
       
-      <div class="flex gap-4 mt-8">
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-6 sm:mt-8">
         ${
           project.repositoryUrl && project.repositoryUrl !== "No disponible"
             ? `
@@ -182,7 +219,7 @@ const { projects } = Astro.props;
             href="${project.repositoryUrl}" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="flex-1 bg-[#0B0705] hover:bg-opacity-80 transition-colors duration-300 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 text-center"
+            class="flex-1 bg-[#0B0705] hover:bg-opacity-80 transition-colors duration-300 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-200 text-center text-sm sm:text-base"
           >
             Ver Repositorio
           </a>
@@ -190,7 +227,7 @@ const { projects } = Astro.props;
             : `
           <button 
             disabled
-            class="flex-1 bg-gray-300 text-gray-500 font-medium py-3 px-6 rounded-lg text-center cursor-not-allowed opacity-60"
+            class="flex-1 bg-gray-300 text-gray-500 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-center cursor-not-allowed opacity-60 text-sm sm:text-base"
           >
             Repositorio No Disponible
           </button>
@@ -203,7 +240,7 @@ const { projects } = Astro.props;
             href="${project.liveUrl}" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="flex-1 bg-[#E75DEE] hover:bg-[#d14dd9] transition-colors duration-300 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 text-center"
+            class="flex-1 bg-[#E75DEE] hover:bg-[#d14dd9] transition-colors duration-300 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-200 text-center text-sm sm:text-base"
           >
             Ver Demo
           </a>
@@ -211,7 +248,7 @@ const { projects } = Astro.props;
             : `
           <button 
             disabled
-            class="flex-1 bg-gray-300 text-gray-500 font-medium py-3 px-6 rounded-lg text-center cursor-not-allowed opacity-60"
+            class="flex-1 bg-gray-300 text-gray-500 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-center cursor-not-allowed opacity-60 text-sm sm:text-base"
           >
             Demo No Disponible
           </button>
