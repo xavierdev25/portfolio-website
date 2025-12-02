@@ -19,6 +19,8 @@ go.work
 
 # Variables de entorno
 .env
+.env.*
+!.env.example
 
 # Archivos de sistema
 .DS_Store

@@ -45,13 +45,13 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:   getAllowedOrigins(),
 		AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
-		AllowedHeaders:   []string{"Content-Type", "Authorization"},
-		AllowCredentials: true,
+		AllowedHeaders:   []string{"Content-Type"},
+		AllowCredentials: false,
 		MaxAge:           300,
 	})
 
-	// Aplicar CORS al handler
-	handler := c.Handler(mux)
+	// Aplicar headers de seguridad y CORS
+	handler := middleware.SecurityHeadersMiddleware(c.Handler(mux))
 
 	// Configurar el servidor con timeouts
 	server := &http.Server{
