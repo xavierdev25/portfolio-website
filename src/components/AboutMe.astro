@@ -1,11 +1,23 @@
 ---
-
+import SplitText from "./ui/SplitText";
 ---
 
 <section class="mx-72 my-64 space-y-24">
-  <h1 class="uppercase text-[#E75DEE] font-anton text-6xl text-center">
-    Detrás del código: Conoce a Xavier Montaño
-  </h1>
+  <div class="mx-auto">
+    <SplitText
+      text="Detrás del código: Conoce a Xavier Montaño"
+      className="uppercase text-[#E75DEE] font-anton text-6xl text-center"
+      delay={70}
+      duration={2.0}
+      ease="elastic.out(0.5, 0.3)"
+      splitType="chars"
+      from={{ opacity: 0, y: 40 }}
+      to={{ opacity: 1, y: 0 }}
+      rootMargin="-100px"
+      textAlign="center"
+      client:only
+    />
+  </div>
   <div class="flex gap-16">
     <img src="/photo.webp" alt="Photo image" />
     <div class="space-y-4">
@@ -25,8 +37,8 @@
           desarrollo web, diseño visual y motion design
         </span>. Con más de <span class="text-[#E75DEE]">3 años de experiencia</span>, convierto
         ideas en experiencias interactivas que conectan marcas con personas. Desde sitios web
-        impactantes hasta animaciones con propósito, puedo ayudarte a llevar tu presencia digital al
-        siguiente nivel.</span
+        impactantes hasta animaciones, puedo ayudarte a llevar tu presencia digital al siguiente
+        nivel.</span
       >
       <div class="flex gap-12 mt-12">
         <div class="flex items-center gap-3">
