@@ -34,7 +34,7 @@ func main() {
 
 	// Rutas
 	mux.HandleFunc("/api/health", handlers.HealthCheckHandler)
-	
+
 	// Aplicar rate limiting solo al endpoint de contacto
 	contactHandler := middleware.RateLimitMiddleware(rateLimiter)(
 		middleware.MethodMiddleware("POST", handlers.ContactHandler),
@@ -98,7 +98,7 @@ func getAllowedOrigins() []string {
 	if origins == "" {
 		return []string{"http://localhost:4321"}
 	}
-	
+
 	// Separar por comas si hay múltiples orígenes
 	var originsList []string
 	for i, j := 0, 0; j <= len(origins); j++ {
@@ -109,6 +109,6 @@ func getAllowedOrigins() []string {
 			i = j + 1
 		}
 	}
-	
+
 	return originsList
 }
