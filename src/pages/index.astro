@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import CurvedLoop from "@/components/ui/CurvedLoop";
+import Hero from "@/components/Hero.astro";
+import AboutMe from "@/components/AboutMe.astro";
+import Experience from "@/components/Experience.astro";
+import Portfolio from "@/components/Portfolio.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <div class="bg-[#0B0705]">
+    <CurvedLoop
+      marqueeText="[UI/UX] ✦ [Frontend Develop] ✦ [Web Develop] ✦ [Web Design] ✦ [Motion Design] ✦ [Graphic Design] ✦ "
+      speed={1}
+      curveAmount={0}
+      direction="left"
+      interactive={true}
+      client:only
+    />
+    <Hero />
+    <AboutMe />
+    <Experience />
+    <Portfolio />
+    <Footer />
+  </div>
 </Layout>

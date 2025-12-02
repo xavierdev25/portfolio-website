@@ -1,0 +1,299 @@
+---
+import type { Project } from "../../types/project";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div id="project-modal" class="modal-overlay hidden">
+  <div class="modal-container">
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  @media (min-width: 640px) {
+    .modal-overlay {
+      padding: 20px;
+    }
+  }
+
+  .modal-overlay.hidden {
+    display: none;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+  }
+
+  .modal-container {
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(-20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .modal-overlay.show .modal-container {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+  }
+
+  @media (min-width: 640px) {
+    .modal-content {
+      border-radius: 16px;
+      padding: 24px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .modal-content {
+      padding: 32px;
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  @media (min-width: 640px) {
+    .modal-close {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .modal-close svg {
+    color: #374151;
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .modal-close svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  /* Animación para el scroll del modal */
+  .modal-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .modal-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .modal-container::-webkit-scrollbar-thumb {
+    background: #e75dee;
+    border-radius: 10px;
+  }
+
+  .modal-container::-webkit-scrollbar-thumb:hover {
+    background: #d14dd9;
+  }
+</style>
+
+<script define:vars={{ projects }}>
+  const modal = document.getElementById("project-modal");
+  const modalBody = document.getElementById("modal-body");
+  const closeBtn = document.getElementById("close-modal");
+  const verMasButtons = document.querySelectorAll(".ver-mas-btn");
+
+  function openModal(projectId) {
+    const project = projects.find((p) => p.id === projectId);
+    if (!project) return;
+
+    modalBody.innerHTML = `
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-anton text-[#E75DEE] pr-8 sm:pr-12 uppercase">${project.title}</h2>
+      <p class="text-lg sm:text-xl md:text-2xl text-[#0B0705] font-bold mb-3 sm:mb-4">${project.category}</p>
+      
+      ${
+        project.images && project.images.length > 0
+          ? `
+        <div class="mb-4 sm:mb-6 grid gap-3 sm:gap-4 ${project.images.length > 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}">
+          ${project.images
+            .map(
+              (img) => `
+            <img src="${img}" alt="${project.title}" class="w-full h-40 sm:h-52 md:h-64 object-cover rounded-lg" />
+          `
+            )
+            .join("")}
+        </div>
+      `
+          : ""
+      }
+      
+      <div class="mb-4 sm:mb-6">
+        <h3 class="text-xl sm:text-2xl font-bold text-[#0B0705]">Descripción</h3>
+        <p class="text-gray-700 leading-5 sm:leading-6 text-base sm:text-lg">${project.description}</p>
+      </div>
+      
+      ${
+        project.technologies && project.technologies.length > 0
+          ? `
+        <div class="mb-4 sm:mb-6">
+          <h3 class="text-xl sm:text-2xl font-bold text-[#0B0705] mb-2 sm:mb-3">Tecnologías</h3>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            ${project.technologies
+              .map(
+                (tech) => `
+              <span class="bg-[#E75DEE] bg-opacity-10 text-white px-2.5 sm:px-4 py-1 sm:py-2 rounded-full text-sm sm:text-base lg:text-lg font-semibold">
+                ${tech}
+              </span>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+          : ""
+      }
+      
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-6 sm:mt-8">
+        ${
+          project.repositoryUrl && project.repositoryUrl !== "No disponible"
+            ? `
+          <a 
+            href="${project.repositoryUrl}" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="flex-1 bg-[#0B0705] hover:bg-opacity-80 transition-colors duration-300 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-200 text-center text-sm sm:text-base"
+          >
+            Ver Repositorio
+          </a>
+        `
+            : `
+          <button 
+            disabled
+            class="flex-1 bg-gray-300 text-gray-500 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-center cursor-not-allowed opacity-60 text-sm sm:text-base"
+          >
+            Repositorio No Disponible
+          </button>
+        `
+        }
+        ${
+          project.liveUrl && project.liveUrl !== "No disponible"
+            ? `
+          <a 
+            href="${project.liveUrl}" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="flex-1 bg-[#E75DEE] hover:bg-[#d14dd9] transition-colors duration-300 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-200 text-center text-sm sm:text-base"
+          >
+            Ver Demo
+          </a>
+        `
+            : `
+          <button 
+            disabled
+            class="flex-1 bg-gray-300 text-gray-500 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-center cursor-not-allowed opacity-60 text-sm sm:text-base"
+          >
+            Demo No Disponible
+          </button>
+        `
+        }
+      </div>
+    `;
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // Trigger animation after a small delay to ensure display change is applied
+    setTimeout(() => {
+      modal.classList.add("show");
+    }, 10);
+  }
+
+  function closeModal() {
+    modal.classList.remove("show");
+
+    // Wait for animation to complete before hiding
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }, 300);
+  }
+
+  verMasButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const projectId = parseInt(button.dataset.projectId);
+      openModal(projectId);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      closeModal();
+    }
+  });
+</script>

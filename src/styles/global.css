@@ -4,25 +4,70 @@
 @import "tailwindcss";
 
 :root {
-    --font-sans:
-        "Urbanist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Urbanist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html {
-    font-family:
-        "Urbanist",
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        "Segoe UI",
-        Roboto,
-        "Helvetica Neue",
-        Arial,
-        "Noto Sans",
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji";
+  font-family:
+    "Urbanist",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+.font-anton{
+  font-family: "Anton SC", sans-serif;
+}
+
+*{
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+/* Mejoras de responsive global */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  min-width: 320px;
+}
+
+
+/* Mejora de tap targets para móviles */
+@media (max-width: 640px) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Split Text Styles - Para que se vean las tildes correctamente */
+.split-parent {
+  overflow: visible !important;
+}
+
+.split-line,
+.split-word,
+.split-char {
+  display: inline-block;
+  overflow: visible;
+  line-height: 1.2;
+}
+
+.split-word {
+  white-space: nowrap;
 }

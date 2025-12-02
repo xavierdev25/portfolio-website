@@ -1,0 +1,134 @@
+---
+import Header from "./Header.astro";
+import Lanyard from "./ui/Lanyard";
+---
+
+<div
+  class="absolute inline-block -translate-y-9 translate-x-4 sm:translate-x-8 md:translate-x-20 lg:translate-x-42 select-none z-40"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="130"
+    height="130"
+    viewBox="0 0 107 108"
+    fill="none"
+    class="block w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-[130px] lg:h-[130px]"
+    ><path
+      d="M31.915 5.45c.978-3.163 4.706-4.52 7.488-2.725l12.755 8.229a7 7 0 0 0 7.062.309l13.424-7.086c2.928-1.546 6.522.13 7.22 3.367l3.2 14.838a7 7 0 0 0 4.778 5.211l14.501 4.482c3.164.977 4.521 4.705 2.726 7.488L96.84 52.317a7 7 0 0 0-.309 7.063l7.086 13.423c1.546 2.929-.13 6.523-3.367 7.221l-14.838 3.2a7 7 0 0 0-5.212 4.777l-4.48 14.502c-.978 3.164-4.706 4.521-7.489 2.726l-12.754-8.23a7 7 0 0 0-7.063-.308l-13.423 7.085c-2.929 1.546-6.523-.13-7.221-3.367l-3.2-14.837a7 7 0 0 0-4.777-5.212L5.29 75.88c-3.163-.98-4.52-4.707-2.725-7.49l8.229-12.755a7 7 0 0 0 .31-7.063L4.016 35.15c-1.545-2.928.13-6.522 3.368-7.22l14.837-3.201a7 7 0 0 0 5.212-4.777z"
+      fill="#FAC20B"
+      stroke="#1E1B1B"
+      stroke-width="2"></path></svg
+  >
+  <span
+    class="absolute inset-0 flex items-center justify-center uppercase italic font-bold text-black text-center rotate-[-20deg] leading-none text-[10px] sm:text-xs md:text-sm"
+  >
+    Desde<br /> Lima, Perú
+  </span>
+</div>
+<section
+  class="relative bg-[#1AFF4C] mx-4 sm:mx-8 md:mx-12 lg:mx-24 rounded-[30px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px] overflow-hidden space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 mt-6 sm:mt-8 md:mt-10 lg:mt-12 select-none"
+>
+  <div class="absolute w-full z-20 hidden xl:block">
+    <Lanyard position={[0, 0, 11]} gravity={[0, -27, 0]} client:load />
+  </div>
+  <div class="px-4 sm:px-8 md:px-12 lg:px-24">
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 sm:gap-0 pt-4 sm:pt-0"
+    >
+      <div class="relative -translate-y-18 opacity-0 hidden lg:inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="107"
+          height="108"
+          viewBox="0 0 107 108"
+          fill="none"
+          class="block"
+          ><path
+            d="M31.915 5.45c.978-3.163 4.706-4.52 7.488-2.725l12.755 8.229a7 7 0 0 0 7.062.309l13.424-7.086c2.928-1.546 6.522.13 7.22 3.367l3.2 14.838a7 7 0 0 0 4.778 5.211l14.501 4.482c3.164.977 4.521 4.705 2.726 7.488L96.84 52.317a7 7 0 0 0-.309 7.063l7.086 13.423c1.546 2.929-.13 6.523-3.367 7.221l-14.838 3.2a7 7 0 0 0-5.212 4.777l-4.48 14.502c-.978 3.164-4.706 4.521-7.489 2.726l-12.754-8.23a7 7 0 0 0-7.063-.308l-13.423 7.085c-2.929 1.546-6.523-.13-7.221-3.367l-3.2-14.837a7 7 0 0 0-4.777-5.212L5.29 75.88c-3.163-.98-4.52-4.707-2.725-7.49l8.229-12.755a7 7 0 0 0 .31-7.063L4.016 35.15c-1.545-2.928.13-6.522 3.368-7.22l14.837-3.201a7 7 0 0 0 5.212-4.777z"
+            fill="#FAC20B"
+            stroke="#1E1B1B"
+            stroke-width="2"></path></svg
+        >
+        <span
+          class="absolute inset-0 flex items-center justify-center uppercase italic font-bold text-black text-center rotate-[-20deg] text-sm leading-none"
+        >
+          Desde<br /> Lima, Perú
+        </span>
+      </div>
+      <div class="z-50 order-first sm:order-none">
+        <Header />
+      </div>
+      <div class="gap-2 z-50 hidden sm:flex">
+        <a
+          class="bg-[#1E1B1B] p-2 sm:p-3 md:p-4 rounded-full cursor-pointer"
+          href="https://www.instagram.com/xvir25/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 fill-white"
+            viewBox="0 0 256 256"
+            aria-label="Instagram"
+          >
+            <path
+              d="M128 23.064c34.177 0 38.225.13 51.722.745 12.48.57 19.258 2.655 23.769 4.408 5.974 2.322 10.238 5.096 14.717 9.575s7.253 8.743 9.575 14.717c1.753 4.511 3.838 11.289 4.408 23.768.615 13.498.745 17.546.745 51.723s-.13 38.226-.745 51.723c-.57 12.48-2.655 19.257-4.408 23.768-2.322 5.974-5.096 10.239-9.575 14.718s-8.743 7.253-14.717 9.574c-4.511 1.753-11.289 3.839-23.769 4.408-13.495.616-17.543.746-51.722.746s-38.228-.13-51.723-.746c-12.48-.57-19.257-2.655-23.768-4.408-5.974-2.321-10.239-5.095-14.718-9.574-4.479-4.48-7.253-8.744-9.574-14.718-1.753-4.51-3.839-11.288-4.408-23.768-.616-13.497-.746-17.545-.746-51.723s.13-38.225.746-51.722c.57-12.48 2.655-19.258 4.408-23.769 2.321-5.974 5.095-10.238 9.574-14.717 4.48-4.48 8.744-7.253 14.718-9.575 4.51-1.753 11.288-3.838 23.768-4.408 13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95-8.418 3.271-15.556 7.648-22.672 14.764S9.991 35.738 6.72 44.155C3.555 52.297 1.392 61.602.77 75.226.147 88.878 0 93.237 0 128s.147 39.122.77 52.774c.622 13.625 2.785 22.93 5.95 31.071 3.27 8.417 7.647 15.556 14.763 22.672s14.254 11.492 22.672 14.763c8.142 3.165 17.446 5.328 31.07 5.95 13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95 8.418-3.27 15.556-7.647 22.672-14.763s11.493-14.254 14.764-22.672c3.164-8.142 5.328-17.446 5.95-31.07.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07-3.271-8.418-7.648-15.556-14.764-22.672S220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0m0 62.27c-36.302 0-65.73 29.43-65.73 65.73 0 36.302 29.428 65.73 65.73 65.73 36.301 0 65.73-29.428 65.73-65.73 0-36.301-29.429-65.73-65.73-65.73m0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667-19.103 42.667-42.667 42.667m83.686-110.994c0 8.484-6.876 15.36-15.36 15.36s-15.36-6.876-15.36-15.36 6.877-15.36 15.36-15.36 15.36 6.877 15.36 15.36"
+            ></path>
+          </svg>
+        </a>
+        <a
+          class="bg-[#1E1B1B] p-2 sm:p-3 md:p-4 rounded-full cursor-pointer"
+          href="https://www.linkedin.com/in/xavierdev25/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
+            preserveAspectRatio="xMidYMid"
+            viewBox="0 0 256 256"
+            ><path
+              d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.91 39.91 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186zM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009s9.851-22.014 22.008-22.016c12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453"
+              fill="#fff"></path></svg
+          >
+        </a>
+        <a
+          class="bg-[#1E1B1B] p-2 sm:p-3 md:p-4 rounded-full cursor-pointer"
+          href="https://github.com/xavierdev25"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" viewBox="0 0 1024 1024" fill="none"
+            ><path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+              transform="scale(64)"
+              fill="#ffff"></path></svg
+          >
+        </a>
+      </div>
+    </div>
+    <div class="flex justify-center sm:justify-start">
+      <div
+        class="space-y-4 sm:space-y-6 md:space-y-8 mt-6 sm:mt-10 md:mt-12 lg:mt-16 z-50 text-center sm:text-left"
+      >
+        <div class="flex flex-col space-y-2 sm:space-y-3">
+          <span
+            class="uppercase font-anton text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-none"
+            >Tu pase vip al <br /> mundo digital</span
+          >
+          <span class="font-light text-sm sm:text-base md:text-lg lg:text-xl"
+            >Doy vida a tus ideas con código, diseño y <br class="hidden sm:block" /> animación.</span
+          >
+        </div>
+        <button
+          class="text-sm sm:text-base md:text-lg lg:text-xl font-extrabold text-white bg-[#1E1B1B] px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-2.5 md:py-3 rounded-full cursor-pointer z-50"
+          >¡Disponible para nuevos proyectos!</button
+        >
+      </div>
+    </div>
+  </div>
+  <span
+    class="font-anton text-[60px] sm:text-[100px] md:text-[160px] lg:text-[200px] xl:text-[280px] text-center flex justify-center tracking-tight text-[#1E1B1B] leading-none translate-y-2 sm:translate-y-4 md:translate-y-6 mt-4 sm:mt-6 md:mt-8 lg:mt-12 px-2"
+    >XAVIER MONTAÑO</span
+  >
+</section>

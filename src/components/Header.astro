@@ -1,0 +1,42 @@
+---
+const sections = [
+  {
+    title: "Sobre mí",
+    redirect: "/",
+  },
+  {
+    title: "Proyecto",
+    redirect: "#proyect",
+  },
+  {
+    title: "Servicios",
+    redirect: "#services",
+  },
+  { title: "Contacto", redirect: "#contact" },
+];
+---
+
+<header class="flex justify-center" role="banner">
+  <nav aria-label="Main navigation">
+    <ul
+      class="bg-[#1E1B1B] px-3 sm:px-5 md:px-6 lg:px-8 py-1.5 sm:py-2 text-white font-semibold text-sm sm:text-base md:text-lg flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 rounded-full"
+      role="menubar"
+    >
+      {
+        sections.map((section) => (
+          <li role="none">
+            <a
+              role="menuitem"
+              href={section.redirect}
+              class="block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap"
+              title={section.title}
+              aria-current={section.redirect === Astro.url.pathname ? "page" : undefined}
+            >
+              {section.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
