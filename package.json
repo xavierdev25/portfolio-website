@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.0",
+    "@astrojs/vercel": "^9.0.2",
+    "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@react-three/rapier": "^2.1.0",

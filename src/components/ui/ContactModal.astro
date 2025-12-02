@@ -25,8 +25,10 @@ import Toast from "./Toast.astro";
       </button>
 
       <div class="modal-header">
-        <h2 class="text-5xl font-anton text-[#E75DEE] uppercase mb-2">Contáctame</h2>
-        <p class="text-lg text-gray-600 mb-6">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-anton text-[#E75DEE] uppercase mb-2">
+          Contáctame
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
           Completa el formulario y me pondré en contacto contigo lo antes posible.
         </p>
       </div>
@@ -134,9 +136,15 @@ import Toast from "./Toast.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 12px;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+  }
+
+  @media (min-width: 640px) {
+    .modal-overlay {
+      padding: 20px;
+    }
   }
 
   .modal-overlay.hidden {
@@ -162,9 +170,16 @@ import Toast from "./Toast.astro";
 
   .modal-content {
     background: white;
-    border-radius: 16px;
-    padding: 32px;
+    border-radius: 12px;
+    padding: 20px;
     position: relative;
+  }
+
+  @media (min-width: 640px) {
+    .modal-content {
+      border-radius: 16px;
+      padding: 32px;
+    }
   }
 
   .modal-close {

@@ -17,6 +17,9 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	// Obtener IP del cliente
 	ip := middleware.GetClientIP(r)
 
+	// Limitar tamaño del body a 10KB para prevenir ataques de payload grande
+	r.Body = http.MaxBytesReader(w, r.Body, 10*1024)
+
 	// Decodificar el cuerpo de la solicitud
 	var contactReq models.ContactRequest
 	if err := json.NewDecoder(r.Body).Decode(&contactReq); err != nil {

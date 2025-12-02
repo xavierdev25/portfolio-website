@@ -19,10 +19,16 @@ const projects = projectEntries
   }));
 ---
 
-<section class="mx-72 py-64 space-y-16">
-  <h1 class="uppercase text-[#E75DEE] font-anton text-8xl text-center">MI PORTAFOLIO</h1>
+<section
+  class="mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-72 py-16 sm:py-24 md:py-32 lg:py-48 xl:py-64 space-y-8 sm:space-y-12 md:space-y-16"
+>
+  <h1
+    class="uppercase text-[#E75DEE] font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-center"
+  >
+    MI PORTAFOLIO
+  </h1>
 
-  <div class="grid grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
     {projects.map((project) => <CardProject project={project} />)}
   </div>
 

@@ -1,65 +1,95 @@
 ---
-
+import SplitText from "./ui/SplitText";
 ---
 
-<section class="mx-72 my-64 space-y-24">
-  <h1 class="uppercase text-[#E75DEE] font-anton text-6xl text-center">
-    Detrás del código: Conoce a Xavier Montaño
-  </h1>
-  <div class="flex gap-16">
-    <img src="/photo.webp" alt="Photo image" />
+<section
+  class="mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-72 my-16 sm:my-24 md:my-32 lg:my-48 xl:my-64 space-y-8 sm:space-y-12 md:space-y-16 lg:space-y-20 xl:space-y-24"
+>
+  <div class="mx-auto">
+    <SplitText
+      text="Detrás del código: Conoce a Xavier Montaño"
+      className="uppercase text-[#E75DEE] font-anton text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center"
+      delay={70}
+      duration={2.0}
+      ease="elastic.out(0.5, 0.3)"
+      splitType="chars"
+      from={{ opacity: 0, y: 40 }}
+      to={{ opacity: 1, y: 0 }}
+      rootMargin="-100px"
+      textAlign="center"
+      client:only
+    />
+  </div>
+  <div class="flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16">
+    <img
+      src="/photo.webp"
+      alt="Photo image"
+      class="w-full max-w-[160px] sm:max-w-[240px] md:max-w-[400px] lg:max-w-none mx-auto lg:mx-0"
+    />
     <div class="space-y-4">
-      <div class="flex gap-12 items-center">
-        <img src="/logo.svg" class="w-auto h-16" alt="Logo image" />
-        <div class="flex flex-col">
-          <span class="text-3xl text-[#E75DEE]">Hola conoce a</span>
-          <span class="uppercase text-white font-anton text-5xl">Xavier</span>
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center">
+        <img src="/logo.svg" class="w-auto h-12 sm:h-14 md:h-16" alt="Logo image" />
+        <div class="flex flex-col text-center sm:text-left">
+          <span class="text-xl sm:text-2xl md:text-3xl text-[#E75DEE]">Hola conoce a</span>
+          <span class="uppercase text-white font-anton text-3xl sm:text-4xl md:text-5xl"
+            >Xavier</span
+          >
           <div>
-            <span class="uppercase text-white font-anton text-5xl">Montaño</span>
-            <span class="text-2xl text-[#E75DEE]">a.k.a. Friend</span>
+            <span class="uppercase text-white font-anton text-3xl sm:text-4xl md:text-5xl"
+              >Montaño</span
+            >
+            <span class="text-lg sm:text-xl md:text-2xl text-[#E75DEE]">a.k.a. Friend</span>
           </div>
         </div>
       </div>
-      <span class="text-white font-light text-2xl leading-none"
+      <span
+        class="text-white font-light text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed block text-center sm:text-left"
         >Soy un creador digital multidisciplinario con enfoque en <span class="text-[#E75DEE]">
           desarrollo web, diseño visual y motion design
         </span>. Con más de <span class="text-[#E75DEE]">3 años de experiencia</span>, convierto
         ideas en experiencias interactivas que conectan marcas con personas. Desde sitios web
-        impactantes hasta animaciones con propósito, puedo ayudarte a llevar tu presencia digital al
-        siguiente nivel.</span
+        impactantes hasta animaciones, puedo ayudarte a llevar tu presencia digital al siguiente
+        nivel.</span
       >
-      <div class="flex gap-12 mt-12">
-        <div class="flex items-center gap-3">
-          <img src="/social/instagram.svg" class="w-auto h-10" alt="Instagram Logo" />
+      <div
+        class="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-12 mt-6 sm:mt-8 md:mt-10 lg:mt-12 justify-center sm:justify-start flex-wrap"
+      >
+        <div class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
+          <img src="/social/instagram.svg" class="w-auto h-7 sm:h-8 md:h-10" alt="Instagram Logo" />
           <a
             href="https://www.instagram.com/xvir25/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-white text-[22px] hover:underline hover:cursor-pointer">@xvir25</a
+            class="text-white text-base sm:text-lg md:text-xl lg:text-[22px] hover:underline hover:cursor-pointer"
+            >@xvir25</a
           >
         </div>
-        <div class="flex items-center gap-3">
-          <img src="/social/linkedin.svg" class="w-auto h-10" alt="LinkedIn Logo" />
+        <div class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
+          <img src="/social/linkedin.svg" class="w-auto h-7 sm:h-8 md:h-10" alt="LinkedIn Logo" />
           <a
             href="https://www.linkedin.com/in/xavierdev25/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-white text-[22px] hover:underline hover:cursor-pointer">xavierdev25</a
+            class="text-white text-base sm:text-lg md:text-xl lg:text-[22px] hover:underline hover:cursor-pointer"
+            >xavierdev25</a
           >
         </div>
-        <div class="flex items-center gap-3">
-          <img src="/social/gmail.svg" class="w-auto h-10" alt="Gmail Logo" />
+        <div class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
+          <img src="/social/gmail.svg" class="w-auto h-7 sm:h-8 md:h-10" alt="Gmail Logo" />
           <a
             href="mailto:xavierdev25@icloud.com"
-            class="text-white text-[22px] hover:underline hover:cursor-pointer"
+            class="text-white text-base sm:text-lg md:text-xl lg:text-[22px] hover:underline hover:cursor-pointer break-all sm:break-normal"
             >xavierdev25@icloud.com</a
           >
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-[#A216D9] justify-center items-center flex py-5">
-    <span class="uppercase text-[#E75DEE] text-5xl font-anton"
+  <div
+    class="bg-[#A216D9] justify-center items-center flex py-3 sm:py-4 md:py-5 rounded-lg sm:rounded-none"
+  >
+    <span
+      class="uppercase text-[#E75DEE] text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-anton text-center px-4"
       >Disponible para nuevos proyectos</span
     >
   </div>
